@@ -27,6 +27,20 @@ import java.util.UUID;
 
 public class NyxonStore extends JavaPlugin implements Listener {
 
+    // Migrazione una tantum: riusa la cartella dati del vecchio plugin "HazeStore".
+    @Override
+    public void onLoad() {
+        java.io.File target = getDataFolder();
+        java.io.File legacy = new java.io.File(target.getParentFile(), "HazeStore");
+        if (!target.exists() && legacy.isDirectory()) {
+            if (legacy.renameTo(target)) {
+                getLogger().info("Migrata cartella dati " + legacy.getName() + " -> " + target.getName());
+            } else {
+                getLogger().warning("Impossibile rinominare " + legacy.getPath() + ": spostala a mano in " + target.getPath());
+            }
+        }
+    }
+
     private ConfigManager       configManager;
     private GuiConfig           guiConfig;
     private ConfirmationConfig  confirmationConfig;
