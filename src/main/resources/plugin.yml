@@ -1,0 +1,21 @@
+name: NyxonStore
+version: '${version}'
+main: net.nyxon.store.NyxonStore
+api-version: '1.19'
+softdepend: [MMOItems, CoinsEngine, PlaceholderAPI, ItemsAdder]
+commands:
+  ns:
+    aliases: [nyxonstore]
+    description: "Main command for NyxonStore"
+    permission: "nyxonstore.open"
+    usage: "/ns [open|admin]"
+permissions:
+  nyxonstore.open:
+    description: "Allows opening the NyxonStore GUI"
+    default: true
+  nyxonstore.vip:
+    description: "Allows seeing and buying VIP items"
+    default: op
+  nyxonstore.admin:
+    description: "Allows editor, reload, force rotation and bypassing hidden/VIP masking"
+    default: op

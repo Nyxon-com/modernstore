@@ -1,0 +1,110 @@
+# ==============================================================================
+#  NYXONSTORE - POOL DI DEFAULT
+# ==============================================================================
+#  TIPOLOGIE DI ITEM DISPONIBILI (type):
+#  ------------------------------------------------------------------------------
+#  1) vanilla     → Item vanilla di Minecraft (es. DIAMOND, EMERALD, ecc.)
+#                   Campi obbligatori: material, price
+#                   Campi opzionali: amount, weight, slot, vip, hidden, max-purchases, currency
+#
+#  2) mmoitems    → Item creati con il plugin MMOItems
+#                   Campi obbligatori: mmoitems_type, mmoitems_id, price
+#                   Esempio: mmoitems_type: SWORD / mmoitems_id: CUTLASS
+#
+#  3) itemsadder  → Item custom creati con ItemsAdder
+#                   Campi obbligatori: itemsadder_id, price
+#                   Esempio: itemsadder_id: nyxon:mystery_box
+#
+#  4) command     → Esegue uno o più comandi al momento dell'acquisto
+#                   Campi obbligatori: commands (lista di comandi), price
+#                   Campi opzionali specifici per command:
+#                     - display-material : materiale mostrato nella GUI (default: COMMAND_BLOCK)
+#                     - display-name     : nome custom mostrato nella GUI
+#                     - console-commands : true = esegue come CONSOLE (default, consigliato)
+#                                          false = esegue come PLAYER (usa permessi player)
+#
+#  PLACEHOLDER SUPPORTATI NEI COMANDI:
+#    {player}  o  {player_name}  → viene sostituito col nome del giocatore che acquista
+#
+#  NOTA SU console-commands:
+#    - Impostando true (o omettendolo, default) i comandi vengono eseguiti dalla console
+#      e quindi non dipendono dai permessi del giocatore. Utile per kit, eco give, ecc.
+#    - Impostando false i comandi vengono eseguiti come se il giocatore li scrivesse in chat,
+#      quindi il giocatore deve avere i permessi per quel comando.
+#    - Non mettere lo slash iniziale davanti ai comandi (viene rimosso automaticamente).
+# ==============================================================================
+
+items:
+  vip_sword:
+    type: mmoitems
+    mmoitems_type: SWORD
+    mmoitems_id: CUTLASS
+    currency: gems
+    price: 500
+    weight: 5
+    vip: true
+  # ---- ESEMPIO DI ITEM DI TIPO "command" ----
+  # console-commands: true → i comandi vengono eseguiti dalla console (default)
+  #   → "kit daily {player}" equivale alla console che scrive: kit daily Steve
+  #   → Utile per comandi che richiedono permessi admin (kit, eco, lp, ecc.)
+  daily_kits:
+    type: command
+    display-material: NETHER_STAR
+    display-name: <gold>Daily Kit
+    # console-commands: true  <- opzionale, default già true (esegue da console)
+    commands:
+      - kit daily {player}
+      - eco give {player} 100
+    currency: tokens
+    price: 25
+    weight: 20
+    max-purchases: 1
+  # ---- ALTRO ESEMPIO command ESEGUITO COME PLAYER ----
+  # console-commands: false → il comando viene eseguito come il giocatore
+  #   → il giocatore deve avere il permesso per poterlo eseguire
+  #   → utile se vuoi che sia un comando "personale" (es. /home, /warp ecc.)
+  player_warp_example:
+    type: command
+    display-material: COMPASS
+    display-name: <green>Warp Spawn
+    console-commands: false   # eseguito dal player, non dalla console
+    commands:
+      - warp spawn
+    price: 10
+    weight: 5
+  fire_sword:
+    type: mmoitems
+    mmoitems_type: SWORD
+    mmoitems_id: FIRE_SWORD
+    price: 250
+    weight: 20
+    slot: 0
+  shadow_blade:
+    type: mmoitems
+    mmoitems_type: SWORD
+    mmoitems_id: SHADOW_BLADE
+    price: 350
+    weight: 15
+    slot: 1
+    vip: true
+  diamond:
+    type: vanilla
+    material: DIAMOND
+    amount: 5
+    price: 100
+    weight: 100
+    slot: 2
+  emerald:
+    type: vanilla
+    material: EMERALD
+    amount: 3
+    price: 80
+    weight: 80
+    slot: 3
+  mystery_box:
+    type: itemsadder
+    itemsadder_id: nyxon:mystery_box
+    price: 150
+    weight: 10
+    slot: 5
+    hidden: true

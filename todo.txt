@@ -1,0 +1,5 @@
+1:
+mettere currency configurabili su ogni item ( quando non è psecificata prende quella default)
+
+2:
+mettere che gli item possono essere dei comandi ( apposta di givvare un item ti fa un command)

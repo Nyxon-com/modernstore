@@ -1,0 +1,44 @@
+enabled: true
+title: "<gold>Confirm Purchase</gold>"
+size: 27
+
+# Each entry supports heads: material "PLAYER_HEAD" + texture (base64) OR owner (player name).
+confirm:
+  slot: 11
+  material: "LIME_WOOL"
+  texture: ""
+  owner: ""
+  name: "<green>Confirm</green>"
+  lore: []
+
+cancel:
+  slot: 15
+  material: "RED_WOOL"
+  texture: ""
+  owner: ""
+  name: "<red>Cancel</red>"
+  lore: []
+
+# The info item shows the real item with its lore IDENTICAL to the store display.
+# Only the slot where it is placed is needed here.
+info:
+  slot: 13
+
+# Default fill for empty slots.
+filler:
+  material: "GRAY_STAINED_GLASS_PANE"
+  texture: ""
+  owner: ""
+  name: " "
+  lore: []
+
+# Extra decorative slots, configurable individually (they override the filler).
+# Example:
+# slots:
+#   0:
+#     material: "PLAYER_HEAD"
+#     texture: "<base64>"
+#     name: "<gold>Decoration"
+#     lore:
+#       - "<gray>Lore line"
+slots: {}

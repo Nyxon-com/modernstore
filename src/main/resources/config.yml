@@ -1,0 +1,69 @@
+prefix: "<gray>[<gold>NyxonStore</gold>]</gray>"
+rotation: "1d 0h 0m"
+currency: "gold"
+default-pool: "default"
+broadcast:
+  enabled: true
+  rotation: true
+  warnings: true
+# Item shown in place of hidden items that a player has not revealed yet.
+# For a head: material "PLAYER_HEAD" + texture (base64) OR owner (player name).
+hidden-item:
+  material: "BARRIER"
+  texture: "" 
+  owner: ""
+  name: "<gray>Secret item</gray>"
+  lore:
+    - "<dark_gray>???"
+
+# Item shown in place of VIP items to players without the nyxonstore.vip permission.
+# Also supports heads (material "PLAYER_HEAD" + texture/owner).
+vip-item:
+  material: "BARRIER"
+  texture: ""
+  owner: ""
+  name: "<gold>VIP item</gold>"
+  lore:
+    - "<gray>Unlock this with <gold>VIP</gold>"
+
+# Item shown when an item has reached its maximum purchases in this rotation.
+# Also supports heads as above (material "PLAYER_HEAD" + texture/owner).
+sold-out-item:
+  material: "BARRIER"
+  texture: ""
+  owner: ""
+  name: "<red>Sold out</red>"
+  lore:
+    - "<gray>This item is sold out"
+
+messages:
+  no-permission: "<red>You do not have permission to do this.</red>"
+  reloaded: "<green>Plugin reloaded successfully!</green>"
+  not-enough-coins: "<red>You don't have enough {currency} to buy this!</red>"
+  inventory-full: "<red>Your inventory is full!</red>"
+  purchased: "<green>You successfully purchased {item} for {price} {currency}!</green>"
+  already-sold: "<red>This item is already sold out!</red>"
+  rotation-forced: "<green>Store pool manually rotated!</green>"
+  store-rotated: "<gold>The Mysterious Man has changed his trades! Check out the store with /ns!</gold>"
+  warnings:
+    60: "<yellow>The mysterious man is about to change his trades in 1 hour!</yellow>"
+    10: "<yellow>The mysterious man is about to change his trades in 10 minutes!</yellow>"
+    1: "<yellow>The mysterious man is about to change his trades in 1 minute!</yellow>"
+
+sounds:
+  gui-open:
+    sound: "BLOCK_CHEST_OPEN"
+    volume: 1.0
+    pitch: 1.0
+  purchase:
+    sound: "ENTITY_PLAYER_LEVELUP"
+    volume: 1.0
+    pitch: 1.0
+  force-rotate:
+    sound: "BLOCK_NOTE_BLOCK_PLING"
+    volume: 1.0
+    pitch: 1.0
+  hidden-reveal:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    volume: 1.0
+    pitch: 1.2
