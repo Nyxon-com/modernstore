@@ -1,7 +1,7 @@
 name: modernstore
 version: '${version}'
 main: net.modern.store.ModernStore
-api-version: '1.19'
+api-version: '26.2'
 softdepend: [MMOItems, CoinsEngine, PlaceholderAPI, ItemsAdder]
 commands:
   ns:
