@@ -1,4 +1,3 @@
-//made with ❤ by nyxon
 package net.modern.store.model;
 
 import java.util.List;

@@ -1,4 +1,3 @@
-// made with ❤ by nyxon
 package net.modern.store;
 
 import net.modern.store.command.ModernStoreCommand;
@@ -277,7 +276,7 @@ public class ModernStore extends JavaPlugin implements Listener {
                                 + " |  _  |/ _` |_  / _ \\/ __| __/ _ \\| '__/ _ \\\n"
                                 + " | | | | (_| |/ /  __/\\__ \\ || (_) | | |  __/\n"
                                 + " \\_| |_/\\__,_/___\\___||___/\\__\\___/|_|  \\___|\n"
-                                + "    <gray>made with ❤️  by nyxon — v"
+                                + "    <gray>modernstore — v"
                                 + getDescription().getVersion()
                                 + "</gray>\n"
                                 + "</gold>"

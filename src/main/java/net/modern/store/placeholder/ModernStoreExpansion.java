@@ -1,4 +1,3 @@
-//made with ❤ by nyxon
 package net.modern.store.placeholder;
 
 import net.modern.store.ModernStore;
