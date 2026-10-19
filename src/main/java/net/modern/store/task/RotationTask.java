@@ -1,14 +1,14 @@
 //made with ❤ by nyxon
-package net.nyxon.store.task;
+package net.modern.store.task;
 
-import net.nyxon.store.NyxonStore;
+import net.modern.store.ModernStore;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class RotationTask extends BukkitRunnable {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
 
-    public RotationTask(NyxonStore plugin) {
+    public RotationTask(ModernStore plugin) {
         this.plugin = plugin;
     }
 

@@ -1,5 +1,5 @@
 //made with ❤ by nyxon
-package net.nyxon.store.model;
+package net.modern.store.model;
 
 import java.util.List;
 

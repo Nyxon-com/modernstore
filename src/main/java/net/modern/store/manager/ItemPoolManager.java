@@ -1,10 +1,10 @@
 //made with ❤ by nyxon.
-package net.nyxon.store.manager;
+package net.modern.store.manager;
 
-import net.nyxon.store.NyxonStore;
-import net.nyxon.store.config.GuiConfig;
-import net.nyxon.store.config.PoolConfig;
-import net.nyxon.store.model.StoreItem;
+import net.modern.store.ModernStore;
+import net.modern.store.config.GuiConfig;
+import net.modern.store.config.PoolConfig;
+import net.modern.store.model.StoreItem;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 
@@ -13,14 +13,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ItemPoolManager {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
     private static final MiniMessage MM = MiniMessage.miniMessage();
 
     private final Map<String, List<StoreItem>> activeItemsMap  = new HashMap<>();
     private final Map<String, Set<Integer>>    sentWarningsMap = new HashMap<>();
     private final Map<String, Long> poolGenerations = new HashMap<>();
 
-    public ItemPoolManager(NyxonStore plugin) {
+    public ItemPoolManager(ModernStore plugin) {
         this.plugin = plugin;
         loadAllActiveItems();
     }
@@ -81,7 +81,7 @@ public class ItemPoolManager {
     public void rotatePool(String poolName, boolean force) {
         List<StoreItem> pool = plugin.getPoolConfig().getPool(poolName);
         if (pool.isEmpty()) {
-            plugin.getLogger().warning("[NyxonStore/PoolManager] Pool '" + poolName
+            plugin.getLogger().warning("[ModernStore/PoolManager] Pool '" + poolName
                     + "' is empty — cannot rotate.");
             return;
         }

@@ -1,15 +1,15 @@
 //made with ❤ by nyxon
-package net.nyxon.store.gui;
+package net.modern.store.gui;
 
-import net.nyxon.store.NyxonStore;
-import net.nyxon.store.config.ConfirmationConfig;
-import net.nyxon.store.config.ConfigManager.PlaceholderItem;
-import net.nyxon.store.config.ConfigManager.SoundConfig;
-import net.nyxon.store.config.GuiConfig;
-import net.nyxon.store.config.PoolConfig;
-import net.nyxon.store.model.StoreItem;
-import net.nyxon.store.util.HeadHelper;
-import net.nyxon.store.util.MaterialHelper;
+import net.modern.store.ModernStore;
+import net.modern.store.config.ConfirmationConfig;
+import net.modern.store.config.ConfigManager.PlaceholderItem;
+import net.modern.store.config.ConfigManager.SoundConfig;
+import net.modern.store.config.GuiConfig;
+import net.modern.store.config.PoolConfig;
+import net.modern.store.model.StoreItem;
+import net.modern.store.util.HeadHelper;
+import net.modern.store.util.MaterialHelper;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -31,14 +31,14 @@ import java.util.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class NyxonStoreGUI implements Listener {
+public class ModernStoreGUI implements Listener {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
     private static final MiniMessage MM = MiniMessage.miniMessage();
 
     private final Map<String, List<ItemStack>> cachedItemsMap = new HashMap<>();
 
-    public NyxonStoreGUI(NyxonStore plugin) {
+    public ModernStoreGUI(ModernStore plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -50,7 +50,7 @@ public class NyxonStoreGUI implements Listener {
         for (StoreItem sItem : activeItems) {
             ItemStack item = resolveItemStack(sItem);
             if (item == null) {
-                plugin.getLogger().warning("[NyxonStore/GUI] Could not resolve ItemStack for item '"
+                plugin.getLogger().warning("[ModernStore/GUI] Could not resolve ItemStack for item '"
                         + sItem.id() + "' (type=" + sItem.type() + ") in pool '" + poolName
                         + "' — slot will be empty.");
                 cached.add(null);
@@ -362,7 +362,7 @@ public class NyxonStoreGUI implements Listener {
         double balance    = readBalance(player, currencyId);
 
         if (balance < 0) {
-            plugin.getLogger().warning("[NyxonStore/Purchase] Could not read balance for player '"
+            plugin.getLogger().warning("[ModernStore/Purchase] Could not read balance for player '"
                     + player.getName() + "', currency='" + currencyId
                     + "'. PlaceholderAPI/CoinsEngine may be missing.");
             player.sendMessage(MM.deserialize(plugin.getConfigManager().getPrefix()
@@ -387,7 +387,7 @@ public class NyxonStoreGUI implements Listener {
         } else {
             ItemStack item = resolveItemStack(sItem);
             if (item == null || item.getType() == Material.AIR) {
-                plugin.getLogger().warning("[NyxonStore/Purchase] Could not resolve item '" + sItem.id()
+                plugin.getLogger().warning("[ModernStore/Purchase] Could not resolve item '" + sItem.id()
                         + "' for player '" + player.getName() + "' (pool=" + poolName + ").");
                 player.sendMessage(MM.deserialize(plugin.getConfigManager().getPrefix()
                         + "<red>Could not give the item. Contact an admin.</red>"));
@@ -474,7 +474,7 @@ public class NyxonStoreGUI implements Listener {
             if (mmoType == null) return null;
             return mmoItems.getItem(mmoType, id.toUpperCase());
         } catch (Exception e) {
-            plugin.getLogger().warning("[NyxonStore/GUI] MMOItem '" + type + "/" + id
+            plugin.getLogger().warning("[ModernStore/GUI] MMOItem '" + type + "/" + id
                     + "' could not be fetched: " + e.getMessage());
             return null;
         }
@@ -488,7 +488,7 @@ public class NyxonStoreGUI implements Listener {
             if (cs == null) return null;
             return (ItemStack) cs.getClass().getMethod("getItemStack").invoke(cs);
         } catch (Exception e) {
-            plugin.getLogger().warning("[NyxonStore/GUI] ItemsAdder item '" + id
+            plugin.getLogger().warning("[ModernStore/GUI] ItemsAdder item '" + id
                     + "' could not be fetched: " + e.getMessage());
             return null;
         }
@@ -559,7 +559,7 @@ public class NyxonStoreGUI implements Listener {
             Sound sound = Sound.valueOf(sc.sound());
             player.playSound(player.getLocation(), sound, sc.volume(), sc.pitch());
         } catch (IllegalArgumentException e) {
-            plugin.getLogger().warning("[NyxonStore/GUI] Invalid sound '" + sc.sound() + "' in config.");
+            plugin.getLogger().warning("[ModernStore/GUI] Invalid sound '" + sc.sound() + "' in config.");
         }
     }
 }

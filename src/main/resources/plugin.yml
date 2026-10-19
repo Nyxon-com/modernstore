@@ -1,17 +1,17 @@
-name: NyxonStore
+name: modernstore
 version: '${version}'
-main: net.nyxon.store.NyxonStore
+main: net.modern.store.ModernStore
 api-version: '1.19'
 softdepend: [MMOItems, CoinsEngine, PlaceholderAPI, ItemsAdder]
 commands:
   ns:
     aliases: [nyxonstore]
-    description: "Main command for NyxonStore"
+    description: "Main command for ModernStore"
     permission: "nyxonstore.open"
     usage: "/ns [open|admin]"
 permissions:
   nyxonstore.open:
-    description: "Allows opening the NyxonStore GUI"
+    description: "Allows opening the ModernStore GUI"
     default: true
   nyxonstore.vip:
     description: "Allows seeing and buying VIP items"

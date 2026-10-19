@@ -1,4 +1,4 @@
-# NyxonStore | Advanced Rotating Shop
+# ModernStore | Advanced Rotating Shop
 
 **Version:** 1.1.2 · **Language:** [English](#-english) · [Italiano](#-italiano)
 
@@ -49,7 +49,7 @@ VIP shops, multi-pool support, per-item currency, command-based items and a full
 
 ### ⚙️ Configuration
 
-All files are generated in `plugins/NyxonStore/` on first run.
+All files are generated in `plugins/ModernStore/` on first run.
 Run `/ns admin reload` to apply changes without restarting.
 
 #### config.yml
@@ -58,7 +58,7 @@ Global settings: rotation timer, currency, broadcasts, sounds, and the shared
 hidden / VIP / sold-out icons.
 
 ```yaml
-prefix: "<gray>[<gold>NyxonStore</gold>]</gray>"
+prefix: "<gray>[<gold>ModernStore</gold>]</gray>"
 rotation: "1d 0h 0m"          # supports d / h / m   e.g.  "12h 30m"
 currency: "gold"              # CoinsEngine currency id (used as global default)
 default-pool: "default"
@@ -247,9 +247,9 @@ Expansion identifier: `nyxonstore` (requires PlaceholderAPI).
 
 1. Make sure **CoinsEngine** and **PlaceholderAPI** are installed on the server.
 2. *(Optional)* Install **MMOItems** and/or **ItemsAdder** to sell custom items.
-3. Drop `NyxonStore.jar` into your `/plugins` folder.
+3. Drop `ModernStore.jar` into your `/plugins` folder.
 4. Restart the server (requires Paper 1.19+ and Java 17+).
-5. Configure your pools in the files generated in `plugins/NyxonStore/`.
+5. Configure your pools in the files generated in `plugins/ModernStore/`.
 6. Run `/ns admin reload` after edits, or `/ns admin forcerotate` to test a rotation right away!
 
 > Economy note: purchases charge the player via `<currency> take <player> <price>`
@@ -300,7 +300,7 @@ Expansion identifier: `nyxonstore` (requires PlaceholderAPI).
 
 ### ⚙️ Configurazione
 
-Tutti i file vengono generati in `plugins/NyxonStore/` al primo avvio.
+Tutti i file vengono generati in `plugins/ModernStore/` al primo avvio.
 Usa `/ns admin reload` per applicare le modifiche senza riavviare.
 
 #### config.yml
@@ -309,7 +309,7 @@ Impostazioni globali: timer di rotazione, valuta, broadcast, suoni e le icone
 condivise per item nascosti / VIP / esauriti.
 
 ```yaml
-prefix: "<gray>[<gold>NyxonStore</gold>]</gray>"
+prefix: "<gray>[<gold>ModernStore</gold>]</gray>"
 rotation: "1d 0h 0m"          # supporta d / h / m   es.  "12h 30m"
 currency: "gold"              # id valuta CoinsEngine (default globale)
 default-pool: "default"
@@ -498,9 +498,9 @@ Identifier dell'espansione: `nyxonstore` (richiede PlaceholderAPI installato).
 
 1. Assicurati che **CoinsEngine** e **PlaceholderAPI** siano installati sul server.
 2. *(Opzionale)* Installa **MMOItems** e/o **ItemsAdder** se vuoi vendere oggetti custom.
-3. Trascina il file `NyxonStore.jar` nella cartella `/plugins`.
+3. Trascina il file `ModernStore.jar` nella cartella `/plugins`.
 4. Riavvia il server (richiede Paper 1.19+ e Java 17+).
-5. Configura i tuoi pool nei file generati in `plugins/NyxonStore/`.
+5. Configura i tuoi pool nei file generati in `plugins/ModernStore/`.
 6. Esegui `/ns admin reload` dopo le modifiche, oppure `/ns admin forcerotate` per testare subito la rotazione!
 
 > Nota economia: gli acquisti addebitano il giocatore tramite `<currency> take <player> <price>`
@@ -518,7 +518,7 @@ Identifier dell'espansione: `nyxonstore` (richiede PlaceholderAPI installato).
   - `display-material` (default `COMMAND_BLOCK`) per l'icona nella GUI
   - `commands:` lista di comandi con placeholder `{player}`
 - **Pool Editor aggiornato** — nuovo tipo `command` nel ciclo, campo currency, display-material e comandi editabili in chat.
-- **Rifiniture** — tutti i commenti del sorgente rimossi, header `//made with ❤ by nyxon` in ogni classe Java, package rinominato in `net.nyxon.store`, scrittura dati asincrona.
+- **Rifiniture** — tutti i commenti del sorgente rimossi, header `//made with ❤ by nyxon` in ogni classe Java, package rinominato in `net.modern.store`, scrittura dati asincrona.
 
 ---
 

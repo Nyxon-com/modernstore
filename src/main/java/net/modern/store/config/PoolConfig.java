@@ -1,8 +1,8 @@
 //made with ❤ by nyxon
-package net.nyxon.store.config;
+package net.modern.store.config;
 
-import net.nyxon.store.NyxonStore;
-import net.nyxon.store.model.StoreItem;
+import net.modern.store.ModernStore;
+import net.modern.store.model.StoreItem;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class PoolConfig {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
     private File poolsFolder;
 
     private final Map<String, List<StoreItem>> pools    = new HashMap<>();
@@ -34,7 +34,7 @@ public class PoolConfig {
         public Map<Integer, GuiConfig.SlotConfig> getSlots() { return slots; }
     }
 
-    public PoolConfig(NyxonStore plugin) {
+    public PoolConfig(ModernStore plugin) {
         this.plugin = plugin;
         load();
     }
@@ -71,7 +71,7 @@ public class PoolConfig {
                 pools.put(poolName, loadPoolItems(cfg, poolName));
                 loadCustomGui(cfg, poolName);
             } catch (Exception e) {
-                plugin.getLogger().severe("[NyxonStore/PoolConfig] Failed to load pool file '"
+                plugin.getLogger().severe("[ModernStore/PoolConfig] Failed to load pool file '"
                         + file.getName() + "': " + e.getMessage());
             }
         }
@@ -81,7 +81,7 @@ public class PoolConfig {
         List<StoreItem> pool = new ArrayList<>();
         ConfigurationSection itemsSec = cfg.getConfigurationSection("items");
         if (itemsSec == null) {
-            plugin.getLogger().warning("[NyxonStore/PoolConfig] Pool '" + poolName
+            plugin.getLogger().warning("[ModernStore/PoolConfig] Pool '" + poolName
                     + "' has no 'items:' section — pool will be empty.");
             return pool;
         }
@@ -89,7 +89,7 @@ public class PoolConfig {
         for (String key : itemsSec.getKeys(false)) {
             ConfigurationSection sec = itemsSec.getConfigurationSection(key);
             if (sec == null) {
-                plugin.getLogger().warning("[NyxonStore/PoolConfig] Item '" + key
+                plugin.getLogger().warning("[ModernStore/PoolConfig] Item '" + key
                         + "' in pool '" + poolName + "' is not a valid YAML section — skipped.");
                 continue;
             }
@@ -190,7 +190,7 @@ public class PoolConfig {
                 try {
                     slot = Integer.parseInt(key);
                 } catch (NumberFormatException e) {
-                    plugin.getLogger().warning("[NyxonStore/PoolConfig] Non-numeric slot key '"
+                    plugin.getLogger().warning("[ModernStore/PoolConfig] Non-numeric slot key '"
                             + key + "' in pool '" + poolName + "' gui override — skipped.");
                     continue;
                 }
@@ -209,14 +209,14 @@ public class PoolConfig {
     }
 
     private void skip(String pool, String itemKey, String reason) {
-        plugin.getLogger().warning("[NyxonStore/PoolConfig] Skipping item '" + itemKey
+        plugin.getLogger().warning("[ModernStore/PoolConfig] Skipping item '" + itemKey
                 + "' in pool '" + pool + "': " + reason + ".");
     }
 
     private int positiveInt(ConfigurationSection sec, String path, int def, String pool, String key) {
         int v = sec.getInt(path, def);
         if (v <= 0) {
-            plugin.getLogger().warning("[NyxonStore/PoolConfig] Item '" + key + "' pool '" + pool
+            plugin.getLogger().warning("[ModernStore/PoolConfig] Item '" + key + "' pool '" + pool
                     + "': '" + path + "' must be > 0 (got " + v + ") — using default " + def + ".");
             return def;
         }
@@ -226,7 +226,7 @@ public class PoolConfig {
     private double nonNegDouble(ConfigurationSection sec, String path, double def, String pool, String key) {
         double v = sec.getDouble(path, def);
         if (v < 0) {
-            plugin.getLogger().warning("[NyxonStore/PoolConfig] Item '" + key + "' pool '" + pool
+            plugin.getLogger().warning("[ModernStore/PoolConfig] Item '" + key + "' pool '" + pool
                     + "': '" + path + "' must be ≥ 0 (got " + v + ") — using default " + def + ".");
             return def;
         }

@@ -1,7 +1,7 @@
 //made with ❤ by nyxon.
-package net.nyxon.store.config;
+package net.modern.store.config;
 
-import net.nyxon.store.NyxonStore;
+import net.modern.store.ModernStore;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ConfigManager {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
 
     private String prefix;
     private long   rotationMillis;
@@ -50,7 +50,7 @@ public class ConfigManager {
             float pitch
     ) {}
 
-    public ConfigManager(NyxonStore plugin) {
+    public ConfigManager(ModernStore plugin) {
         this.plugin = plugin;
         load();
     }
@@ -65,7 +65,7 @@ public class ConfigManager {
         plugin.reloadConfig();
         FileConfiguration cfg = plugin.getConfig();
 
-        prefix         = cfg.getString("prefix", "<gray>[<gold>NyxonStore</gold>]</gray> ");
+        prefix         = cfg.getString("prefix", "<gray>[<gold>ModernStore</gold>]</gray> ");
         rotationMillis = parseRotationString(cfg.getString("rotation", "1d 0h 0m"));
         currency       = cfg.getString("currency", "gold");
         defaultPool    = cfg.getString("default-pool", "default");
@@ -116,7 +116,7 @@ public class ConfigManager {
                 String msg  = warnSec.getString(key);
                 if (msg != null) warnings.put(minutes, msg);
             } catch (NumberFormatException e) {
-                plugin.getLogger().warning("[NyxonStore/Config] Non-numeric warning key '" + key + "' in config.yml — skipped.");
+                plugin.getLogger().warning("[ModernStore/Config] Non-numeric warning key '" + key + "' in config.yml — skipped.");
             }
         }
     }
@@ -147,7 +147,7 @@ public class ConfigManager {
                 else if (part.endsWith("min")) total += Long.parseLong(part.replace("min", "")) *     60_000L;
                 else if (part.endsWith("m"))   total += Long.parseLong(part.replace("m", ""))   *     60_000L;
             } catch (NumberFormatException e) {
-                plugin.getLogger().warning("[NyxonStore/Config] Malformed rotation token '" + part + "' — ignored.");
+                plugin.getLogger().warning("[ModernStore/Config] Malformed rotation token '" + part + "' — ignored.");
             }
         }
         return total > 0 ? total : 86_400_000L;

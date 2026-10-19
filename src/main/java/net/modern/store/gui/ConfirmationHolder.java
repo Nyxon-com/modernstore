@@ -1,7 +1,7 @@
 //made with ❤ by nyxon
-package net.nyxon.store.gui;
+package net.modern.store.gui;
 
-import net.nyxon.store.model.StoreItem;
+import net.modern.store.model.StoreItem;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 

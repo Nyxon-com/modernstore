@@ -1,5 +1,5 @@
 //made with ❤ by nyxon.
-package net.nyxon.store.util;
+package net.modern.store.util;
 
 import org.bukkit.Material;
 
@@ -62,10 +62,10 @@ public final class MaterialHelper {
     }
 
     private static void warn(String msg) {
-        if (logger != null) logger.warning("[NyxonStore/Material] " + msg);
+        if (logger != null) logger.warning("[ModernStore/Material] " + msg);
     }
 
     private static void info(String msg) {
-        if (logger != null) logger.info("[NyxonStore/Material] " + msg);
+        if (logger != null) logger.info("[ModernStore/Material] " + msg);
     }
 }

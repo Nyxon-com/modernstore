@@ -1,19 +1,19 @@
 //made with ❤ by nyxon
-package net.nyxon.store.placeholder;
+package net.modern.store.placeholder;
 
-import net.nyxon.store.NyxonStore;
-import net.nyxon.store.model.StoreItem;
+import net.modern.store.ModernStore;
+import net.modern.store.model.StoreItem;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class NyxonStoreExpansion extends PlaceholderExpansion {
+public class ModernStoreExpansion extends PlaceholderExpansion {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
 
-    public NyxonStoreExpansion(NyxonStore plugin) {
+    public ModernStoreExpansion(ModernStore plugin) {
         this.plugin = plugin;
     }
 

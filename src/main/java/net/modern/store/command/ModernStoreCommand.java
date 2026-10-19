@@ -1,7 +1,7 @@
 //made with ❤ by nyxon
-package net.nyxon.store.command;
+package net.modern.store.command;
 
-import net.nyxon.store.NyxonStore;
+import net.modern.store.ModernStore;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -16,16 +16,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NyxonStoreCommand implements CommandExecutor, TabCompleter {
+public class ModernStoreCommand implements CommandExecutor, TabCompleter {
 
     private static final MiniMessage MM = MiniMessage.miniMessage();
 
     private static final String PERM_OPEN  = "nyxonstore.open";
     private static final String PERM_ADMIN = "nyxonstore.admin";
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
 
-    public NyxonStoreCommand(NyxonStore plugin) {
+    public ModernStoreCommand(ModernStore plugin) {
         this.plugin = plugin;
     }
 
@@ -129,7 +129,7 @@ public class NyxonStoreCommand implements CommandExecutor, TabCompleter {
                         plugin.getConfigManager().getForceRotateSound().volume(),
                         plugin.getConfigManager().getForceRotateSound().pitch());
             } catch (IllegalArgumentException e) {
-                plugin.getLogger().warning("[NyxonStore/Command] Invalid force-rotate sound '"
+                plugin.getLogger().warning("[ModernStore/Command] Invalid force-rotate sound '"
                         + plugin.getConfigManager().getForceRotateSound().sound() + "' in config.");
             }
         }

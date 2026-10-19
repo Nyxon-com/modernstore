@@ -1,10 +1,10 @@
 //made with ❤ by nyxon
-package net.nyxon.store.gui;
+package net.modern.store.gui;
 
-import net.nyxon.store.NyxonStore;
-import net.nyxon.store.config.PoolConfig;
-import net.nyxon.store.model.StoreItem;
-import net.nyxon.store.util.MaterialHelper;
+import net.modern.store.ModernStore;
+import net.modern.store.config.PoolConfig;
+import net.modern.store.model.StoreItem;
+import net.modern.store.util.MaterialHelper;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -32,7 +32,7 @@ import java.math.RoundingMode;
 
 public class PoolEditorGUI implements Listener {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
     private static final MiniMessage MM = MiniMessage.miniMessage();
 
     private static final int ITEMS_PER_PAGE = 45;
@@ -53,7 +53,7 @@ public class PoolEditorGUI implements Listener {
         public String getAction()   { return action;   }
     }
 
-    public PoolEditorGUI(NyxonStore plugin) {
+    public PoolEditorGUI(ModernStore plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -61,7 +61,7 @@ public class PoolEditorGUI implements Listener {
     public void openMainMenu(Player player) {
         EditorHolder holder = new EditorHolder(MenuState.MAIN_MENU, null, null, null, null);
         Inventory inv = Bukkit.createInventory(holder, 45,
-                MM.deserialize("<gold>NyxonStore Editor <gray>| <white>Pool List"));
+                MM.deserialize("<gold>ModernStore Editor <gray>| <white>Pool List"));
         fillEditor(inv, 45);
 
         setItem(inv, 41, Material.LIME_WOOL,
@@ -577,7 +577,7 @@ public class PoolEditorGUI implements Listener {
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         String fpath = "items." + itemId + "." + field;
         cfg.set(fpath, !cfg.getBoolean(fpath, false));
-        trySave(cfg, file, "[NyxonStore/Editor] Cannot save toggle for " + poolName + "/" + itemId);
+        trySave(cfg, file, "[ModernStore/Editor] Cannot save toggle for " + poolName + "/" + itemId);
         reloadAndRefresh(poolName);
     }
 
@@ -585,7 +585,7 @@ public class PoolEditorGUI implements Listener {
         File file = poolFile(poolName);
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         cfg.set("items." + itemId, null);
-        trySave(cfg, file, "[NyxonStore/Editor] Cannot delete item " + itemId + " from " + poolName);
+        trySave(cfg, file, "[ModernStore/Editor] Cannot delete item " + itemId + " from " + poolName);
         reloadAndRefresh(poolName);
     }
 
@@ -603,7 +603,7 @@ public class PoolEditorGUI implements Listener {
         cfg.set(path + ".hidden",        false);
         cfg.set(path + ".max-purchases", -1);
         cfg.set(path + ".slot",          -1);
-        trySave(cfg, file, "[NyxonStore/Editor] Cannot create item " + itemId + " in " + poolName);
+        trySave(cfg, file, "[ModernStore/Editor] Cannot create item " + itemId + " in " + poolName);
         reloadAndRefresh(poolName);
         return true;
     }
@@ -621,7 +621,7 @@ public class PoolEditorGUI implements Listener {
         cfg.set(path + ".hidden",        false);
         cfg.set(path + ".max-purchases", -1);
         cfg.set(path + ".slot",          -1);
-        trySave(cfg, file, "[NyxonStore/Editor] Cannot create pool " + name);
+        trySave(cfg, file, "[ModernStore/Editor] Cannot create pool " + name);
         reloadAndRefresh(name);
     }
 

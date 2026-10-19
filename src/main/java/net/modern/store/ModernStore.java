@@ -1,15 +1,15 @@
 // made with ❤ by nyxon
-package net.nyxon.store;
+package net.modern.store;
 
-import net.nyxon.store.command.NyxonStoreCommand;
-import net.nyxon.store.config.*;
-import net.nyxon.store.gui.NyxonStoreGUI;
-import net.nyxon.store.gui.PoolEditorGUI;
-import net.nyxon.store.manager.ItemPoolManager;
-import net.nyxon.store.task.RotationTask;
-import net.nyxon.store.util.HeadHelper;
-import net.nyxon.store.util.MaterialHelper;
-import net.nyxon.store.util.ServerVersion;
+import net.modern.store.command.ModernStoreCommand;
+import net.modern.store.config.*;
+import net.modern.store.gui.ModernStoreGUI;
+import net.modern.store.gui.PoolEditorGUI;
+import net.modern.store.manager.ItemPoolManager;
+import net.modern.store.task.RotationTask;
+import net.modern.store.util.HeadHelper;
+import net.modern.store.util.MaterialHelper;
+import net.modern.store.util.ServerVersion;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
@@ -25,19 +25,37 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.UUID;
 
-public class NyxonStore extends JavaPlugin implements Listener {
+public class ModernStore extends JavaPlugin implements Listener {
 
-    // Migrazione una tantum: riusa la cartella dati del vecchio plugin "HazeStore".
     @Override
     public void onLoad() {
-        java.io.File target = getDataFolder();
-        java.io.File legacy = new java.io.File(target.getParentFile(), "HazeStore");
-        if (!target.exists() && legacy.isDirectory()) {
-            if (legacy.renameTo(target)) {
-                getLogger().info("Migrata cartella dati " + legacy.getName() + " -> " + target.getName());
-            } else {
-                getLogger().warning("Impossibile rinominare " + legacy.getPath() + ": spostala a mano in " + target.getPath());
+        adoptDataFolder("HazeStore");
+        adoptDataFolder("NyxonStore");
+    }
+
+    private void adoptDataFolder(String legacyName) {
+        File target = getDataFolder();
+        File parent = target.getParentFile();
+        if (parent == null) {
+            return;
+        }
+        File legacy = new File(parent, legacyName);
+        if (!legacy.isDirectory()) {
+            return;
+        }
+        if (target.exists()) {
+            String[] kids = target.list();
+            if (kids != null && kids.length > 0) {
+                return;
             }
+            if (!target.delete()) {
+                return;
+            }
+        }
+        if (legacy.renameTo(target)) {
+            getLogger().info("Migrata cartella dati " + legacy.getName() + " -> " + target.getName());
+        } else {
+            getLogger().warning("Impossibile rinominare " + legacy.getPath() + ": spostala a mano in " + target.getPath());
         }
     }
 
@@ -48,7 +66,7 @@ public class NyxonStore extends JavaPlugin implements Listener {
     private DataManager         dataManager;
     private LogManager          logManager;
     private ItemPoolManager     itemPoolManager;
-    private NyxonStoreGUI        guiManager;
+    private ModernStoreGUI        guiManager;
     private PoolEditorGUI       poolEditorGUI;
 
     private boolean mmoItemsEnabled;
@@ -76,9 +94,9 @@ public class NyxonStore extends JavaPlugin implements Listener {
 
         if (!version.isSupported()) {
             getLogger().severe(
-                    "[NyxonStore] Unsupported server version ("
+                    "[ModernStore] Unsupported server version ("
                             + version.getDisplayVersion()
-                            + ")! NyxonStore requires Minecraft 1.19+."
+                            + ")! ModernStore requires Minecraft 1.19+."
             );
 
             getServer().getPluginManager().disablePlugin(this);
@@ -86,7 +104,7 @@ public class NyxonStore extends JavaPlugin implements Listener {
         }
 
         getLogger().info(
-                "[NyxonStore] Server version: "
+                "[ModernStore] Server version: "
                         + version.getDisplayVersion()
                         + " — OK"
         );
@@ -99,25 +117,25 @@ public class NyxonStore extends JavaPlugin implements Listener {
 
         if (!mmoItemsEnabled) {
             getLogger().warning(
-                    "[NyxonStore] MMOItems not found — MMOItems items disabled."
+                    "[ModernStore] MMOItems not found — MMOItems items disabled."
             );
         }
 
         if (!coinsEngineEnabled) {
             getLogger().warning(
-                    "[NyxonStore] CoinsEngine/ExcellentEconomy not found — transactions may fail."
+                    "[ModernStore] CoinsEngine/ExcellentEconomy not found — transactions may fail."
             );
         }
 
         if (!placeholderApiEnabled) {
             getLogger().warning(
-                    "[NyxonStore] PlaceholderAPI not found — placeholder support disabled."
+                    "[ModernStore] PlaceholderAPI not found — placeholder support disabled."
             );
         }
 
         if (!itemsAdderEnabled) {
             getLogger().warning(
-                    "[NyxonStore] ItemsAdder not found — ItemsAdder items disabled."
+                    "[ModernStore] ItemsAdder not found — ItemsAdder items disabled."
             );
         }
 
@@ -149,14 +167,14 @@ public class NyxonStore extends JavaPlugin implements Listener {
         dataManager        = new DataManager(this);
         logManager         = new LogManager(this);
         itemPoolManager    = new ItemPoolManager(this);
-        guiManager         = new NyxonStoreGUI(this);
+        guiManager         = new ModernStoreGUI(this);
         poolEditorGUI      = new PoolEditorGUI(this);
 
         // ---------------------------------------------------------------------
         //  COMMAND
         // ---------------------------------------------------------------------
 
-        NyxonStoreCommand cmd = new NyxonStoreCommand(this);
+        ModernStoreCommand cmd = new ModernStoreCommand(this);
 
         if (getCommand("ns") != null) {
             getCommand("ns").setExecutor(cmd);
@@ -174,7 +192,7 @@ public class NyxonStore extends JavaPlugin implements Listener {
         // ---------------------------------------------------------------------
 
         if (placeholderApiEnabled) {
-            new net.nyxon.store.placeholder.NyxonStoreExpansion(this).register();
+            new net.modern.store.placeholder.ModernStoreExpansion(this).register();
         }
 
         // ---------------------------------------------------------------------
@@ -184,7 +202,7 @@ public class NyxonStore extends JavaPlugin implements Listener {
         new RotationTask(this).runTaskTimer(this, 20L, 20L);
 
         getLogger().info(
-                "[NyxonStore] Enabled successfully (v"
+                "[ModernStore] Enabled successfully (v"
                         + getDescription().getVersion()
                         + ")"
         );
@@ -202,7 +220,7 @@ public class NyxonStore extends JavaPlugin implements Listener {
 
         HeadHelper.clearCaches();
 
-        getLogger().info("[NyxonStore] Disabled.");
+        getLogger().info("[ModernStore] Disabled.");
     }
 
     // -------------------------------------------------------------------------
@@ -319,7 +337,7 @@ public class NyxonStore extends JavaPlugin implements Listener {
         return itemPoolManager;
     }
 
-    public NyxonStoreGUI getGuiManager() {
+    public ModernStoreGUI getGuiManager() {
         return guiManager;
     }
 

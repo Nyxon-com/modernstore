@@ -1,7 +1,7 @@
 //made with ❤ by nyxon.
-package net.nyxon.store.config;
+package net.modern.store.config;
 
-import net.nyxon.store.NyxonStore;
+import net.modern.store.ModernStore;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -16,10 +16,10 @@ public class LogManager {
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
     private final File logFile;
 
-    public LogManager(NyxonStore plugin) {
+    public LogManager(ModernStore plugin) {
         this.plugin  = plugin;
         this.logFile = new File(plugin.getDataFolder(), "log.txt");
         ensureExists();
@@ -50,7 +50,7 @@ public class LogManager {
         try {
             logFile.createNewFile();
         } catch (IOException e) {
-            plugin.getLogger().severe("[NyxonStore/Log] Could not create log.txt: " + e.getMessage());
+            plugin.getLogger().severe("[ModernStore/Log] Could not create log.txt: " + e.getMessage());
         }
         return true;
     }
@@ -59,7 +59,7 @@ public class LogManager {
         try (PrintWriter out = new PrintWriter(new FileWriter(logFile, true))) {
             out.println(entry);
         } catch (IOException e) {
-            plugin.getLogger().severe("[NyxonStore/Log] Could not write to log.txt: " + e.getMessage());
+            plugin.getLogger().severe("[ModernStore/Log] Could not write to log.txt: " + e.getMessage());
         }
     }
 }

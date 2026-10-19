@@ -1,7 +1,7 @@
 //made with ❤ by nyxon
-package net.nyxon.store.config;
+package net.modern.store.config;
 
-import net.nyxon.store.NyxonStore;
+import net.modern.store.ModernStore;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class DataManager {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
     private File dataFile;
     private FileConfiguration dataConfig;
 
@@ -21,7 +21,7 @@ public class DataManager {
     private final Map<String, Map<String, Integer>>          purchaseCounts    = new HashMap<>();
     private final Map<UUID, Map<String, Set<String>>>        revealedItems     = new HashMap<>();
 
-    public DataManager(NyxonStore plugin) {
+    public DataManager(ModernStore plugin) {
         this.plugin = plugin;
         setup();
     }
@@ -40,7 +40,7 @@ public class DataManager {
         try {
             dataFile.createNewFile();
         } catch (IOException e) {
-            plugin.getLogger().severe("[NyxonStore/DataManager] Could not create data.yml: " + e.getMessage());
+            plugin.getLogger().severe("[ModernStore/DataManager] Could not create data.yml: " + e.getMessage());
         }
         return true;
     }
@@ -95,7 +95,7 @@ public class DataManager {
             try {
                 uuid = UUID.fromString(uuidStr);
             } catch (IllegalArgumentException e) {
-                plugin.getLogger().warning("[NyxonStore/DataManager] Malformed UUID '" + uuidStr
+                plugin.getLogger().warning("[ModernStore/DataManager] Malformed UUID '" + uuidStr
                         + "' in data.yml revealed-items — skipped.");
                 continue;
             }
@@ -115,7 +115,7 @@ public class DataManager {
         try {
             dataConfig.save(dataFile);
         } catch (IOException e) {
-            plugin.getLogger().severe("[NyxonStore/DataManager] Could not save data.yml: " + e.getMessage());
+            plugin.getLogger().severe("[ModernStore/DataManager] Could not save data.yml: " + e.getMessage());
         }
     }
 
@@ -131,7 +131,7 @@ public class DataManager {
                 try {
                     dataConfig.save(dataFile);
                 } catch (IOException e) {
-                    plugin.getLogger().severe("[NyxonStore/DataManager] Async save failed: " + e.getMessage());
+                    plugin.getLogger().severe("[ModernStore/DataManager] Async save failed: " + e.getMessage());
                 }
             }
         });

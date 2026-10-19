@@ -1,7 +1,7 @@
 //made with ❤ by nyxon.
-package net.nyxon.store.config;
+package net.modern.store.config;
 
-import net.nyxon.store.NyxonStore;
+import net.modern.store.ModernStore;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ConfirmationConfig {
 
-    private final NyxonStore plugin;
+    private final ModernStore plugin;
 
     private boolean enabled;
     private String  title;
@@ -37,7 +37,7 @@ public class ConfirmationConfig {
             List<String> lore
     ) {}
 
-    public ConfirmationConfig(NyxonStore plugin) {
+    public ConfirmationConfig(ModernStore plugin) {
         this.plugin = plugin;
         load();
     }
@@ -81,12 +81,12 @@ public class ConfirmationConfig {
                 try {
                     slot = Integer.parseInt(key);
                 } catch (NumberFormatException e) {
-                    plugin.getLogger().warning("[NyxonStore/ConfirmationConfig] Non-numeric slot key '" + key
+                    plugin.getLogger().warning("[ModernStore/ConfirmationConfig] Non-numeric slot key '" + key
                             + "' in confirmation.yml — skipped.");
                     continue;
                 }
                 if (slot < 0 || slot >= size) {
-                    plugin.getLogger().warning("[NyxonStore/ConfirmationConfig] Decoration slot " + slot
+                    plugin.getLogger().warning("[ModernStore/ConfirmationConfig] Decoration slot " + slot
                             + " out of range (0–" + (size - 1) + ") in confirmation.yml — skipped.");
                     continue;
                 }
@@ -112,7 +112,7 @@ public class ConfirmationConfig {
 
     private void validateSlot(String label, int slot) {
         if (slot < 0 || slot >= size) {
-            plugin.getLogger().warning("[NyxonStore/ConfirmationConfig] '" + label + "' slot " + slot
+            plugin.getLogger().warning("[ModernStore/ConfirmationConfig] '" + label + "' slot " + slot
                     + " is out of range (0–" + (size - 1) + ") in confirmation.yml.");
         }
     }

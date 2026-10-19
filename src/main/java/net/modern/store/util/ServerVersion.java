@@ -1,5 +1,5 @@
 //made with ❤ by nyxon.
-package net.nyxon.store.util;
+package net.modern.store.util;
 
 import org.bukkit.Bukkit;
 
