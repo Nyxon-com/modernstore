@@ -520,6 +520,10 @@ Identifier dell'espansione: `nyxonstore` (richiede PlaceholderAPI installato).
 - **Pool Editor aggiornato** — nuovo tipo `command` nel ciclo, campo currency, display-material e comandi editabili in chat.
 - **Rifiniture** — tutti i commenti del sorgente rimossi, header `//made with ❤ by nyxon` in ogni classe Java, package rinominato in `net.modern.store`, scrittura dati asincrona.
 
+## License
+
+MIT. Nyxon / ModernStore.
+
 ---
 
 <div align="center">made with ❤ by nyxon</div>
