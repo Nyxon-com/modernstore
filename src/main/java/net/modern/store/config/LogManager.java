@@ -1,3 +1,5 @@
+//made with love by nyxon
+
 package net.modern.store.config;
 
 import net.modern.store.ModernStore;
@@ -12,53 +14,53 @@ import java.time.format.DateTimeFormatter;
 
 public class LogManager {
 
-    private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm:ss");
+  private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+  private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    private final ModernStore plugin;
-    private final File logFile;
+  private final ModernStore plugin;
+  private final File logFile;
 
-    public LogManager(ModernStore plugin) {
-        this.plugin  = plugin;
-        this.logFile = new File(plugin.getDataFolder(), "log.txt");
-        ensureExists();
+  public LogManager(ModernStore plugin) {
+    this.plugin  = plugin;
+    this.logFile = new File(plugin.getDataFolder(), "log.txt");
+    ensureExists();
+  }
+
+  public void logPurchase(Player player, String poolName, String itemId, String itemLabel, double price) {
+    LocalDateTime now  = LocalDateTime.now();
+    String date = now.format(DATE_FMT);
+    String time = now.format(TIME_FMT);
+
+    String entry = String.format(
+        "date=%s time=%s player=%s pool=%s item=%s label=%s price=%.2f",
+        date, time, player.getName(), poolName, itemId, itemLabel, price);
+
+    plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> writeEntry(entry));
+  }
+
+  public boolean reload() {
+    return ensureExists();
+  }
+
+  private boolean ensureExists() {
+    if (logFile.exists()) return false;
+
+    File dir = plugin.getDataFolder();
+    if (!dir.exists()) dir.mkdirs();
+
+    try {
+      logFile.createNewFile();
+    } catch (IOException e) {
+      plugin.getLogger().severe("[ModernStore/Log] Could not create log.txt: " + e.getMessage());
     }
+    return true;
+  }
 
-    public void logPurchase(Player player, String poolName, String itemId, String itemLabel, double price) {
-        LocalDateTime now  = LocalDateTime.now();
-        String date = now.format(DATE_FMT);
-        String time = now.format(TIME_FMT);
-
-        String entry = String.format(
-                "date=%s time=%s player=%s pool=%s item=%s label=%s price=%.2f",
-                date, time, player.getName(), poolName, itemId, itemLabel, price);
-
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> writeEntry(entry));
+  private void writeEntry(String entry) {
+    try (PrintWriter out = new PrintWriter(new FileWriter(logFile, true))) {
+      out.println(entry);
+    } catch (IOException e) {
+      plugin.getLogger().severe("[ModernStore/Log] Could not write to log.txt: " + e.getMessage());
     }
-
-    public boolean reload() {
-        return ensureExists();
-    }
-
-    private boolean ensureExists() {
-        if (logFile.exists()) return false;
-
-        File dir = plugin.getDataFolder();
-        if (!dir.exists()) dir.mkdirs();
-
-        try {
-            logFile.createNewFile();
-        } catch (IOException e) {
-            plugin.getLogger().severe("[ModernStore/Log] Could not create log.txt: " + e.getMessage());
-        }
-        return true;
-    }
-
-    private void writeEntry(String entry) {
-        try (PrintWriter out = new PrintWriter(new FileWriter(logFile, true))) {
-            out.println(entry);
-        } catch (IOException e) {
-            plugin.getLogger().severe("[ModernStore/Log] Could not write to log.txt: " + e.getMessage());
-        }
-    }
+  }
 }
